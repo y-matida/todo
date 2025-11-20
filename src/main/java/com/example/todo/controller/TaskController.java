@@ -17,28 +17,28 @@ import java.util.List;
 // updateTask()：PUT：タスクの更新
 // deleteTask()：DELETE：タスクの削除
 
-@CrossOrigin(origins = "*") //フロントエンドとの接続許可
+@CrossOrigin(origins = "*") // フロントエンドとの接続許可
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
-    
-    //@Autowired：依存性注入（DI）、クラスが必要とする依存オブジェクトを自動的に注入する
+
+    // @Autowired：依存性注入（DI）、クラスが必要とする依存オブジェクトを自動的に注入する
     @Autowired
     private TaskRepository taskRepository;
 
-    //一覧取得
+    // 一覧取得
     @GetMapping
     public List<Task> getTasks() {
         return taskRepository.findAll();
     }
 
-    //新規作成
+    // 新規作成
     @PostMapping
     public Task createTask(@RequestBody Task task) {
         return taskRepository.save(task);
     }
 
-    //更新
+    // 更新
     @PutMapping("/{id}")
     public Task updateTask(@PathVariable Long id, @RequestBody Task updated) {
         Task task = taskRepository.findById(id).orElseThrow();
@@ -47,7 +47,7 @@ public class TaskController {
         return taskRepository.save(task);
     }
 
-    //削除
+    // 削除
     @DeleteMapping("/{id}")
     public void deleteTask(@PathVariable Long id) {
         taskRepository.deleteById(id);
